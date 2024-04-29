@@ -17,6 +17,7 @@ def verificar(contra):
 contra = input("Ingresa una contraseña: ")
 res = verificar(contra)
 print(res)
+
 """"
 Defini verificar con condiciones y funciones como "upper" para las mayusculas "islower" para la minusculas "isdigit" para el numero y "len" para la capacidad de digitos tenga la contraseña (contra si es menor que < 8 esta malo)
 Todo sacado de una gia de phyton ellibrodepython.com
