@@ -5,7 +5,6 @@ print(type(numeroComplejo))
 coordenada = range(9)
 print (coordenada)
 print(type(coordenada))
-
 # Datos set() Conjunto
 numneros = {2,3,5,7,9}
 numneros.add(13)
@@ -25,23 +24,18 @@ Bytes: Es un tipo de dato inmutable, representa una secuencia de datos hasta el 
 #Crear un objeto a partir de un bytes
 variableBytes=bytes("hola que es lo que realmente pasa", "utf-8")
 print(variableBytes)
-
 #Crear un texto a partid de numeros bytes
 b = bytes([72, 111, 108, 97])
 print(b)
-
 #byteArray
 c= bytearray("hola que pasa realmente","utf-8")
 print(c)
-
 #MODIFICAR
 c[0] = 83
 print(c)
-
 #Datps de tipo none: Es un tipo de dato unico que no representa un valor.
 variableNone= None
 print(variableNone)
-
 hola = "Hola bebe"
 print(hola[5:9])
 print("hola 'Duoc' ")
