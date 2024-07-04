@@ -1,0 +1,116 @@
+#Para poder modificar archivos
+import os
+
+# Clase para presentar una reserva con funcion init y modificar lo que se crea
+class Reserva:
+    def __init__(self, nombre, apellido, ciudad_origen, tour, cantidad_personas):
+        self.nombre = nombre
+        self.apellido = apellido
+        self.ciudad_origen = ciudad_origen
+        self.tour = tour
+        self.cantidad_personas = cantidad_personas
+
+# Lista para almacenar todas las reservas
+reservas = []
+
+# Opciones de tours disponibles
+tours_disponibles = ["Torres del paine", "Carretera austral", "Chiloe"]
+
+# Funcion def para registrar una reserva
+def registrar_reserva():
+    print("\n\n\tRegistro de Reserva:\n")
+    nombre = input("Nombre del cliente: ")
+    apellido = input("Apellido del cliente: ")
+    ciudad_origen = input("Ciudad de origen: ")
+    
+    # Llamamos a la variable para mostrar opciones de tours disponibles
+    print("\n\tTours Disponibles:\n")
+    for i, tour in enumerate(tours_disponibles, 1):
+        print(f"{i}. {tour}")
+        #El for para la iteracion y orden de la reserva
+    
+    # Seleccionamos un tour
+    while True:
+        try:
+            opcion_tour = int(input("\nSeleccione el número del tour: "))
+            if 1 <= opcion_tour <= len(tours_disponibles):
+                break
+            else:
+                print("Opción inválida. Intente nuevamente.")
+        except ValueError:
+            print("Entrada inválida. Intente nuevamente.")
+
+    #Pedimos el numero de personas que van a tomar ese boleto
+    tour_seleccionado = tours_disponibles[opcion_tour - 1]
+    cantidad_personas = input("\nCantidad de personas: ")
+    
+    reserva = Reserva(nombre, apellido, ciudad_origen, tour_seleccionado, cantidad_personas)
+    reservas.append(reserva)
+    print("Reserva registrada exitosamente.")
+
+# funcion para listar las reservas
+def listar_reservas():
+    if not reservas:
+        print("No hay reservas registradas.")
+    else:
+        print("\nListado de Reservas:")
+        for reserva in reservas:
+            print(f"Cliente: {reserva.nombre} {reserva.apellido} | Ciudad de Origen: {reserva.ciudad_origen} | Tour: {reserva.tour} | Cantidad de Personas: {reserva.cantidad_personas}")
+
+# funcion para imprimir detalle de reservas POR DESTINO en un archivo de texto, osea se acumulan
+def imprimir_detalle():
+    print("\nImprimiendo los detalles de reservas")
+    print("\n\tDestinos Disponibles:")
+    for i, tour in enumerate(tours_disponibles, 1):
+        print(f"{i}. {tour}")
+    
+    while True:
+        try:
+            opcion_destino = int(input("\nSeleccione el numero del destino para generar el archivo: "))
+            if 1 <= opcion_destino <= len(tours_disponibles):
+                break
+            else:
+                print("Opción inválida. Intente nuevamente.")
+        except ValueError:
+            print("Entrada inválida. Intente nuevamente.")
+    
+    destino_seleccionado = tours_disponibles[opcion_destino - 1]
+    nombre_archivo = f"detalle_reservas_{destino_seleccionado.replace(' ', '_').lower()}.txt"
+    
+    with open(nombre_archivo, 'w') as archivo:
+        archivo.write(f"Detalle de Reservas para {destino_seleccionado}\n\n")
+        for reserva in reservas:
+            if reserva.tour == destino_seleccionado:
+                archivo.write(f"Cliente: {reserva.nombre} {reserva.apellido}\n")
+                archivo.write(f"Ciudad de Origen: {reserva.ciudad_origen}\n")
+                archivo.write(f"Cantidad de Personas: {reserva.cantidad_personas}\n\n")
+    
+    print(f"Archivo {nombre_archivo} generado exitosamente.")
+
+#Funcion para el prgorama principal
+def viaje():
+    while True:
+        print("\nBienvenido a SurExplora - Sistema de Reservas\n")
+        print("1. Registrar Reserva")
+        print("2. Listar Todas las Reservas")
+        print("3. Imprimir Detalle de Reservas por Destino")
+        print("4. Salir del Programa")
+        
+        try:
+            opcion = int(input("\nSeleccione una opción: "))
+            if opcion == 1:
+                registrar_reserva()
+            elif opcion == 2:
+                listar_reservas()
+            elif opcion == 3:
+                imprimir_detalle()
+            elif opcion == 4:
+                print("Saliendo del programa...")
+                break
+            else:
+                print("Opción inválida. Intente nuevamente.")
+        except ValueError:
+            print("Entrada inválida. Intente nuevamente.")
+
+if __name__ == "__main__":
+    viaje()
