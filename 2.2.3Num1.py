@@ -1,3 +1,5 @@
+#que pene mas enano el que tienes
+
 rut = input ("Ingrese rut: ")
 nomAlum = input("Ingrese el nombre: ")
 curso = input("Ingrese curso: ") 
